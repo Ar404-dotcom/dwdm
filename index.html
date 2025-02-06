@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Resizer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h2>Resize Your Image</h2>
-        <form id="uploadForm" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" id="fileInput" required>
-            <input type="number" name="width" id="width" placeholder="Width" required>
-            <input type="number" name="height" id="height" placeholder="Height" required>
-            <button type="submit">Resize</button>
-        </form>
-        <div id="output">
-            {% if output_image %}
-                <img src="{{ output_image }}" alt="Resized Image">
-            {% endif %}
-        </div>
-    </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <h1>Image Resizer</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <br><br>
+        <input type="number" name="width" placeholder="Width" required>
+        <br><br>
+        <input type="number" name="height" placeholder="Height" required>
+        <br><br>
+        <input type="submit" value="Resize">
+    </form>
+
+    <!-- Display the resized image if available -->
+    {% if image_url %}
+    <h2>Resized Image:</h2>
+    <img src="{{ url_for('static', filename='output.jpg') }}" alt="Resized Image">
+    {% endif %}
+
+    <!-- Link to JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
