@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, render_template
 from PIL import Image
 
 app = Flask(__name__)
@@ -41,21 +41,17 @@ def upload_file():
                 output_path = os.path.join(static_dir, 'output.jpg')
                 resized_img.save(output_path, quality=95)  # Save with high quality
                 
-                return f"<img src='static/output.jpg' alt='Resized Image'>"
+                # Pass the image URL to the template
+                image_url = 'static/output.jpg'
+                return render_template('index.html', image_url=image_url)
             
             except Exception as e:
                 return f"An error occurred: {str(e)}", 500
         else:
             return "Invalid file type. Please upload an image.", 400
     
-    return '''
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <input type="number" name="width" placeholder="Width" required>
-        <input type="number" name="height" placeholder="Height" required>
-        <input type="submit" value="Resize">
-    </form>
-    '''
+    # Handle GET request (render the form)
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
