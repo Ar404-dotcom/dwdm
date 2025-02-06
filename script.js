@@ -1,13 +1,10 @@
-document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    const fileInput = document.getElementById('fileInput');
-    const width = document.getElementById('width').value;
-    const height = document.getElementById('height').value;
+// static/js/script.js
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('JavaScript is working!');
 
-    if (!fileInput.files.length) {
-        alert("Please select an image file.");
-        event.preventDefault();
-    } else if (width <= 0 || height <= 0) {
-        alert("Width and height must be greater than zero.");
-        event.preventDefault();
-    }
+    // Example: Add an alert when the form is submitted
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        alert('Form submitted!');
+    });
 });
